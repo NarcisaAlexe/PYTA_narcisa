@@ -19,6 +19,48 @@ Pentru a menține output-ul la un nivel acceptabil, afișează la fiecare dintre
 doar informații despre primele 3 obiecte,
 iar apoi afiseaza "+x more posts/albums/todos", unde x este numărul de obiecte rămase.
 """
+import requests
+# 1. Luam toate postarile pentru utilizatorul/user-ul cu id-ul 1
+response = requests.get(url="https://jsonplaceholder.typicode.com/users/1/posts")
+
+# informatii status code
+# print(response.status_code)
+
+# informatii continut raspuns
+
+# 1. sub forma de bytes
+# print(response.content)
+
+# 2. sub forma de text
+# print(response.text)
+
+# 3. sub forma de json
+posts = response.json()
+print(posts)
+# print(type(posts))
+# print(posts[0])
+
+# v1
+for i in range(0, 3):
+    post = posts[i]
+    print(f"Post id {post['id']}, title {post['title']}, userId {post['userId']}")
+left_posts = len(posts) - 3
+print(f"+{left_posts} more posts")
+
+# v2
+# for post in posts[0:3]:
+#     print(f"Post id {post['id']}, title {post['title']}, userId {post['userId']}")
+# left_posts = len(posts) - 3
+# print(f"+{left_posts} more posts")
+
+
+# # v3
+# for index, post in enumerate(posts):
+#     if index > 2:
+#         left_posts = len(posts) - 3
+#         print(f"+{left_posts} more posts")
+#         break
+#     print(f"Post id {post['id']}, title {post['title']}, userId {post['userId']}")
 
 """
 2. Alege un post, și afișează lista de comentarii.
